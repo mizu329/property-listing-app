@@ -5,10 +5,13 @@ import { HousingLocationInfo } from "./housinglocation";
   providedIn: "root",
 })
 export class HousingService {
-  readonly url = "http://localhost:3000/locations";
+  readonly url = "/assets/db.json";
   async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
-    const data = await fetch(this.url);
-    return (await data.json()) ?? [];
+    const response = await fetch(this.url);
+    const data = await response.json();
+    console.log(data);
+
+    return data.locations ?? [];
   }
 
   async getHousingLocationById(
